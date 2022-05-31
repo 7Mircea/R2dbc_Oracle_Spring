@@ -23,7 +23,7 @@ public class ITStoreController {
 
     @GetMapping("/produse")
     public List<Produse> getAllProduse() {
-        return repository.findAll().subscribeOn(Schedulers.boundedElastic()).buffer().blockLast();
+        return repository.findAll().subscribeOn(Schedulers.parallel()).buffer().blockLast();
     }
 
     @GetMapping("/{id}")

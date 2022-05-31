@@ -38,8 +38,8 @@ class DatabaseConfiguration extends AbstractR2dbcConfiguration {
     @Value("${spring.r2dbc.url}")
     String url;
 
-    private static final String DB_PROTOCOL = "tcp";
-    private static final String DB_DRIVER = "oracle";
+    private static final String DB_PROTOCOL = "oracle";
+    private static final String DB_DRIVER = "pool";
     private int maxClientConnections = 1000;
 
     @Bean
@@ -51,7 +51,7 @@ class DatabaseConfiguration extends AbstractR2dbcConfiguration {
         String database = myUrl.getDatabase();
 
         ConnectionFactoryOptions options = ConnectionFactoryOptions.builder()
-                .option(CONNECT_TIMEOUT, Duration.ofSeconds(1))
+//                .option(CONNECT_TIMEOUT, Duration.ofSeconds(2))
                 .option(DRIVER, DB_DRIVER)
                 .option(PROTOCOL, DB_PROTOCOL)
                 .option(MAX_SIZE, Integer.valueOf(maxSize))
