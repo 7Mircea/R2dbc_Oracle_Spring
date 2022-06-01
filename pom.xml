@@ -19,14 +19,16 @@
     </properties>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>io.r2dbc</groupId>-->
+<!--            <artifactId>r2dbc-pool</artifactId>-->
+<!--            <version>0.8.2.RELEASE</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.r2dbc</groupId>
-            <artifactId>r2dbc-pool</artifactId>
-            <version>0.8.2.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>r2dbc-bom</artifactId>
+            <version>Arabba-SR13</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>com.oracle.database.r2dbc</groupId>
@@ -35,26 +37,34 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-r2dbc</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.projectreactor/reactor-core -->
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-core</artifactId>
-            <version>3.4.0</version>
-        </dependency>
+
+
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/io.projectreactor/reactor-core &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>io.projectreactor</groupId>-->
+<!--            <artifactId>reactor-core</artifactId>-->
+<!--            <version>3.4.0</version>-->
+<!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.reactivestreams/reactive-streams -->
-        <dependency>
-            <groupId>org.reactivestreams</groupId>
-            <artifactId>reactive-streams</artifactId>
-            <version>1.0.3</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.reactivestreams</groupId>-->
+<!--            <artifactId>reactive-streams</artifactId>-->
+<!--            <version>1.0.3</version>-->
+<!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc11 -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc11</artifactId>
             <version>21.3.0.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.r2dbc/r2dbc-bom -->
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>

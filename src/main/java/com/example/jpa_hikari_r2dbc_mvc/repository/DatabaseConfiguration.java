@@ -1,5 +1,7 @@
 package com.example.jpa_hikari_r2dbc_mvc.repository;
 
+import io.r2dbc.pool.ConnectionPool;
+import io.r2dbc.pool.ConnectionPoolConfiguration;
 import io.r2dbc.spi.ConnectionFactories;
 import io.r2dbc.spi.ConnectionFactory;
 import io.r2dbc.spi.ConnectionFactoryOptions;
@@ -9,6 +11,7 @@ import org.springframework.boot.r2dbc.ConnectionFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration;
 import org.springframework.r2dbc.connection.R2dbcTransactionManager;
 import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator;
@@ -38,7 +41,7 @@ class DatabaseConfiguration extends AbstractR2dbcConfiguration {
     @Value("${spring.r2dbc.url}")
     String url;
 
-    private static final String DB_PROTOCOL = "oracle";
+    private static final String DB_PROTOCOL = "oracle:tcp";
     private static final String DB_DRIVER = "pool";
     private int maxClientConnections = 1000;
 
@@ -54,6 +57,8 @@ class DatabaseConfiguration extends AbstractR2dbcConfiguration {
 //                .option(CONNECT_TIMEOUT, Duration.ofSeconds(2))
                 .option(DRIVER, DB_DRIVER)
                 .option(PROTOCOL, DB_PROTOCOL)
+//                .option(BACKGROUND_EVICTION_INTERVAL,1)
+                .option(SSL,false)
                 .option(MAX_SIZE, Integer.valueOf(maxSize))
                 .option(HOST, host)
                 .option(PORT, port)
@@ -62,8 +67,12 @@ class DatabaseConfiguration extends AbstractR2dbcConfiguration {
                 .option(DATABASE, database)
                 .build();
         ConnectionFactoryBuilder builder = ConnectionFactoryBuilder.withOptions(options.mutate());
+        ConnectionPoolConfiguration configuration=ConnectionPoolConfiguration.builder(builder.build())
+                .maxIdleTime(Duration.ofMillis(1000))
+                .maxSize(20)
+                .build();
 
-        return builder.build();
+        return new ConnectionPool(configuration);
         //return ConnectionFactories.get(options);
         //unlimited connections below?
         //return new PostgresqlConnectionFactory(
